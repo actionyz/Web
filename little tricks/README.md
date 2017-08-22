@@ -92,3 +92,8 @@ def GetShell():
 if __name__ == "__main__":
     GetShell()
 ```
+
+# trick 5
+简单的加以分析，因为要注入pass中的值，而且pass被过滤所以利用order By来进行比较
+但前提是要知道admin的值，所以利用`username='^1^1#&password=1`把用户名爆出来
+下面就好写了
