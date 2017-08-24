@@ -115,3 +115,6 @@ http://127.0.0.1/index.php?option=a\';phpinfo();//
 replacement中可以包含后向引用\n 或(php 4.0.4以上可用)$n，语法上首选后者。 每个 这样的引用将被匹配到的第n个捕获子组捕获到的文本替换。 n 可以是0-99，\0和$0代表完整的模式匹配文本。
 http://127.0.0.1/test/ph.php?option=;phpinfo();
 http://127.0.0.1/test/ph.php?option=%00 或者 http://127.0.0.1/test/ph.php?option=$0
+
+# trick 7
+考察PHP文件名的特性这里写入1.php/.就可以绕过 猜测是路径解析不报错的
