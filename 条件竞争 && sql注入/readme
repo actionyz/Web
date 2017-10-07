@@ -1,0 +1,156 @@
+import time
+import requests
+import threading
+# name = "1"
+
+
+
+buy = 'http://127.0.0.1/shopping/opt.php?name=article6&action=buy'
+sale = 'http://127.0.0.1/shopping/opt.php?name=article6&action=sale'
+
+cookies1 = {
+	'PHPSESSID':'aetm2nnt381sr4fqh4q0ncrv47'
+}
+cookies2 = {
+	'PHPSESSID':'kfalkb90vc9e2vp99cls1au2h1'
+}
+def buys1():
+	q2 = requests.post(url=buy,cookies=cookies1)
+	print q2.content
+	return q2
+def buys2():
+	q2 = requests.post(url=buy,cookies=cookies2)
+	print q2.content
+	return q2
+def sales1():
+	# print 1
+	# time.sleep(3)
+	q1 = requests.post(url=sale,cookies=cookies1)
+	print q1.content
+	return q1
+def sales2():
+	# print 1
+	# time.sleep(3)
+	q1 = requests.post(url=sale,cookies=cookies2)
+	print q1.content
+	return q1
+
+
+# threading.Thread(target=buys, args=()).start()
+# threading.Thread(target=buys, args=()).start()
+# threading.Thread(target=buys, args=()).start()
+# threading.Thread(target=buys, args=()).start()
+# threading.Thread(target=sales1, args=()).start()
+# threading.Thread(target=buys, args=()).start()
+# threading.Thread(target=buys, args=()).start()
+
+
+# time.sleep(2)
+
+for i in range(0,10000):
+	threading.Thread(target=buys1, args=()).start()
+	threading.Thread(target=buys2, args=()).start()
+	time.sleep(2)
+	sales1()
+
+# 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+import requests
+import threading
+import time
+# from concurrent import futures
+
+data = {'username':'qqq','password':'qqq','sub':1}
+
+headers1 = {'Cookies': 'PHPSESSID=kfalkb90vc9e2vp99cls1au2h1'}
+headers2 = {'Cookies': 'PHPSESSID=kfalkb90vc9e2vp99cls1au2h2'}
+
+
+s=requests.session()
+s1=requests.session()
+
+b = s.post('http://127.0.0.1/shopping/login.php',data=data,headers=headers1)
+c = s1.post('http://127.0.0.1/shopping/login.php',data=data,headers=headers2)
+d = s.get('http://127.0.0.1/shopping/opt.php?name=article6&action=buy',headers=headers1)
+# print b.content
+time.sleep(2)
+def sell1():
+    a = s.get("http://127.0.0.1/shopping/opt.php?name=article6&action=sale",headers=headers1).content
+    print(a)
+def sell2():
+    a = s1.get("http://127.0.0.1/shopping/opt.php?name=article6&action=sale",headers=headers2).content
+    print(a)
+
+# ex = futures.ThreadPoolExecutor(max_workers=2)
+# ex.submit(sell1)
+# ex.submit(sell2)
+
+threading.Thread(target=sell1, args=()).start()
+threading.Thread(target=sell2, args=()).start()
+
+
+
+
+
+
+
+
+
+
+
+import time
+import requests
+import threading
+# name = "1"
+
+data = {'username':'qqq','password':'qqq','sub':1}
+
+r1 = requests.session()
+r2 = requests.session()
+url = 'http://127.0.0.1/shopping/login.php'
+r1.post(url=url,data=data)
+r2.post(url=url,data=data)
+buy = 'http://127.0.0.1/shopping/opt.php?name=article6&action=buy'
+sale = 'http://127.0.0.1/shopping/opt.php?name=article6&action=sale'
+
+
+def buys1():
+	q2 = r1.post(url=buy)
+	print q2.content
+	return q2
+def buys2():
+	q2 = r2.post(url=buy)
+	print q2.content
+	return q2
+def sales1():
+	# print 1
+	# time.sleep(3)
+	q1 = r1.post(url=sale)
+	print q1.content
+	return q1
+def sales2():
+	# print 1
+	# time.sleep(3)
+	q1 = r2.post(url=sale)
+	print q1.content
+	return q1
+
+for i in range(0,10000):
+	threading.Thread(target=buys1, args=()).start()
+	threading.Thread(target=buys2, args=()).start()
+	time.sleep(2)
+	sales1()
+
+# 	
