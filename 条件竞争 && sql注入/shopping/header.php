@@ -219,7 +219,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="banner-text">
 							<h3>Lorem Ipsum is not simply dummy  </h3>
 						<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor .</p>
-						<a href="single.php">Learn More</a>
+						<a href="products.php">Learn More</a>
 						</div>
 				
 				</li>

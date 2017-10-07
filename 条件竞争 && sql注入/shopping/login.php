@@ -45,11 +45,11 @@ if(isset($_POST['sub']))
 			</form>
 		</div>
 		<div class="col-md-4 left-account ">
-			<a href="single.html"><img class="img-responsive " src="images/s1.jpg" alt=""></a>
+			 <img class="img-responsive " src="images/1.png" alt=""> 
 			<div class="five">
 			<h2>25% </h2><span>discount</span>
 			</div>
-			<a href="register.html" class="create">Create an account</a>
+			
 <div class="clearfix"> </div>
 		</div>
 	<div class="clearfix"> </div>

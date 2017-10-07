@@ -29,6 +29,22 @@ function fresh()
     $price = sql_get("select * from have where name='price'")[0];
     $have = sql_get("select * from have where name='$_SESSION[username]'")[0];
 }
+function fetch_money($name)
+{
+    $ss = sql_get("select money from users where name='$_SESSION[username]'")[0]['money'];
+    return $ss;
+}
+function article_num($name)
+{
+    $ss = sql_get("select * from have where name='$_SESSION[username]'")[0][$name];
+    return $ss;
+}
+
+function save_money($name,$money)
+{
+    sql_get("update users set money=$money  where name='$name'");
+}
+
 
 fresh();
 //echo var_dump(sql_get("SELECT `name`, `pass`, `money` FROM `users` WHERE 1"));

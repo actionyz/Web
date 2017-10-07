@@ -14,7 +14,7 @@ if(!empty($_POST['username']) && !empty($_POST['password']&&isset($_POST['submit
     {
         sql_get("INSERT INTO `users`(`name`, `pass`, `money`,`level`) VALUES ('$username','$password',100,1)");
         sql_get("update users set level=0 where name = '$username'");
-        sql_get("INSERT INTO `have`(`name`, `article1`, `article2`, `article3`, `article4`, `article5`) VALUES ('$username',0,0,0,0,0)");
+        sql_get("INSERT INTO `have`(`name`, `article1`, `article2`, `article3`, `article4`, `article5`,`article6`,`TS`) VALUES ('$username',0,0,0,0,0,0,0)");
         echo "<script>alert('register success!');</script>";
         echo "<script>window.location.href='login.php'</script>";
     }

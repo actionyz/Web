@@ -79,55 +79,7 @@ include "header.php";
 							<div class="clearfix"> </div>
 							</div>
 				</div>
-<?
 
-
-
-if(isset($_GET['action']) && isset($_GET['name']))
-{
-    $good_name = addslashes($_GET['name']);
-    if($_GET['action']=='buy')
-    {
-        if($_SESSION['money'] >= $price[$_GET['name']])
-        {
-            $_SESSION['money']= $_SESSION['money']-$price[$_GET['name']];
-            //这是正确的购买方式，先扣钱再增加商品数量
-            sql_get("update users set money=$_SESSION[money] where name='$_SESSION[username]'");
-            sql_get("update have set ".$good_name."=".($have[$good_name]+1)." where name='$_SESSION[username]'");
-            fresh();
-        }
-        else
-        {
-
-            echo "<script>alert('Money not enough!');</script>";
-        }
-
-
-    }
-    if($_GET['action']=='sale')
-    {
-        if($have[$good_name] <= 0)
-        {
-            echo "<script>alert('You don\'t have it');</script>";
-        }
-        else
-        {
-            //这是正确的售出方式，先减少商品数量再增加钱
-            $_SESSION['money'] = $_SESSION['money']+$price[$_GET['name']];
-            sql_get("update have set ".$good_name."=".($have[$good_name]-1)." where name='$_SESSION[username]'");
-            sql_get("update users set money=$_SESSION[money] where name='$_SESSION[username]'");
-
-            fresh();
-        }
-
-    }
-
-
-
-}
-
-
-?>
 
 
 
@@ -159,7 +111,7 @@ foreach ($imgs as $key => $value) {
 					<div class="col-md-4 bottom-cd simpleCart_shelfItem">
 						  
 						<div class="product-at ">
-							<a href="products.php?name=<? echo $key;?>&action=sale"><img class="img-responsive" src="images/<? echo $value;?>" alt="">
+							<a href="opt.php?name=<? echo $key;?>&action=sale"><img class="img-responsive" src="images/<? echo $value;?>" alt="">
 							<div class="pro-grid">
 										<span class="buy-in">Sale</span>
 							</div>
@@ -169,7 +121,7 @@ foreach ($imgs as $key => $value) {
 						<p class="tun"><? echo $names[$key]; ?> <br />
 						 You have <? echo $have[$key];?></p>
                         <p ></p>
-						<a href="products.php?name=<? echo $key;?>&action=buy" class="item_add"><p class="number item_price"><i> </i> Buy $<? echo $price[$key];?></p></a>
+						<a href="opt.php?name=<? echo $key;?>&action=buy" class="item_add"><p class="number item_price"><i> </i> Buy $<? echo $price[$key];?></p></a>
 					</div>
 <? }?>
 
